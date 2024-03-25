@@ -38,6 +38,7 @@ if [[ $# == 0 ]]; then
     read -r "SDK"
 
     echo ""
+    [[ -z $PACKAGE || -z $MODEL || -z $SDK ]] && echo -e "${red}Not all fields were filled out!${end}" && exit 1
 elif [[ $# == 3 ]]; then
     PACKAGE=$1
     MODEL=$2
@@ -48,7 +49,6 @@ else
     echo -e "${bold}package:${end} Package Name 'com.package.name'"
     echo -e "${bold}model:${end} Model Number 'SM-XXXXX'"
     echo -e "${bold}sdk:${end} SDK Level (19-34)"
-    echo ""
     exit 1
 fi
 
