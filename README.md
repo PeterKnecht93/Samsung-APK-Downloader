@@ -9,15 +9,16 @@ you can manually update samsung apps.
 On a Linux or WSL system, run:
 
 ```
-./samsung-apk-downloader.sh <package> <model> <sdk>
+./samsung-apk-downloader.sh <package> <model> <sdk> [csc]
 ```
 
 You can also run the script without any arguments, so it will ask you for the details:
 ```
 ./samsung-apk-downloader.sh
-Enter package name (Samsung apps only): 
-Enter your device model (SM-XXXXX format): 
+Enter package name (Samsung apps only):
+Enter your device model (SM-XXXXX format):
 Enter your android version (SDK format - 19 30 34 etc.):
+Enter CSC code (Default DBT):
 ```
 
 ## Credits:

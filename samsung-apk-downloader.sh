@@ -37,23 +37,30 @@ if [[ $# == 0 ]]; then
     echo -ne "${green}Enter your android version (SDK format - ${yellow}19 30 34${green} etc.): ${end}"
     read -r "SDK"
 
+    echo -ne "${green}Enter CSC code (Default DBT): ${end}"
+    read -r "CSC"
+
     echo ""
     [[ -z $PACKAGE || -z $MODEL || -z $SDK ]] && echo -e "${red}Not all fields were filled out!${end}" && exit 1
-elif [[ $# == 3 ]]; then
+elif [[ $# -ge 3 ]]; then
     PACKAGE=$1
     MODEL=$2
     SDK=$3
+    CSC=$4
 else
-    echo -e "${italic}Usage: $0 <package> <model> <sdk> ${end} or"
+    echo -e "${italic}Usage: $0 <package> <model> <sdk> [csc] ${end} or"
     echo -e "${italic}Usage: $0 ${end} for inputting details manually \n"
     echo -e "${bold}package:${end} Package Name 'com.package.name'"
     echo -e "${bold}model:${end} Model Number 'SM-XXXXX'"
     echo -e "${bold}sdk:${end} SDK Level (19-34)"
+    echo -e "${bold}csc:${end} CSC code (DBT etc.)"
     exit 1
 fi
 
+[ -z "$CSC" ] && CSC="DBT"
+
 URL_FORMAT="https://vas.samsungapps.com/stub/stubDownload.as?appId=${PACKAGE}&deviceId=${MODEL}\
-&mcc=425&mnc=01&csc=ILO&sdkVer=${SDK}&pd=0&systemId=1608665720954&callerId=com.sec.android.app.samsungapps\
+&mcc=425&mnc=01&csc=${CSC}&sdkVer=${SDK}&pd=0&systemId=1608665720954&callerId=com.sec.android.app.samsungapps\
 &abiType=64&extuk=0191d6627f38685f"
 URL=$(curl -s "$URL_FORMAT")
 
